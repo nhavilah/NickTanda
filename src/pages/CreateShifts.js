@@ -17,6 +17,7 @@ function CreateShifts() {
     )
     .then(response => response.json())
     .then(data => {
+      console.log(data)
       setUsers(data)
     })
   },[])
@@ -29,7 +30,7 @@ function CreateShifts() {
 
   const createShift = (e) => {
     e.preventDefault()
-    if(!formData.userId || !formData.start || !formData.finish) {
+    if(!selection || !formData.start || !formData.finish) {
       alert("Make sure you fill out all fields!")
     }else{
       fetch(
@@ -51,7 +52,9 @@ function CreateShifts() {
       .then(response => response.json())
       .then(data => 
         {
-          console.log(data)
+          if(data.length === 5) {
+            alert("Shift Created Successfully")
+          }
         } 
       )
     }
@@ -67,19 +70,26 @@ function CreateShifts() {
 
   return (
     <div>
+      <h1>Add User</h1>
       <select onChange={(e)=>{setSelection(e.target.value)}}>
+        <option value="" disabled selected>Select A User</option>
         <DropDownOptions />
       </select>
       <form onSubmit={createShift}>
-        <h1>Create Organisation</h1>
+        <h1>Create Shift</h1>
         <label>
-          Name:
-          <input type="text" name="name" onChange={(e)=>{setFormData({...formData, name: e.target.value})}} value={formData.name}/>
+          Start:
+          <input type="text" name="name" onChange={(e)=>{setFormData({...formData, start: e.target.value})}} value={formData.start}/>
         </label>
         <br />
         <label>
-          Hourly Rate:
-          <input type="number" name="hourlyRate" onChange={(e)=>{setFormData({...formData, hourlyRate: e.target.value})}} value={formData.hourlyRate}/>
+          Finish:
+          <input type="text" name="name" onChange={(e)=>{setFormData({...formData, finish: e.target.value})}} value={formData.finish}/>
+        </label>
+        <br />
+        <label>
+          Break Length:
+          <input type="text" name="name" onChange={(e)=>{setFormData({...formData, breakLength: e.target.value})}} value={formData.breakLength}/>
         </label>
         <br />
         <br />

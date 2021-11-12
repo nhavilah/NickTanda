@@ -6,9 +6,9 @@ import SignUp from "../pages/Signup";
 import CreateOrganisation from "../pages/CreateOrganisation";
 import ListOrganisation from "../pages/ListOrganisation";
 import UpdateOrganisation from "../pages/UpdateOrganisation";
-import ViewShifts from "../pages/ListShifts";
 import ListUsers from "../pages/ListUsers";
 import CreateShifts from "../pages/CreateShifts";
+import ListShifts from "../pages/ListShifts";
 
 function TopNav() {
   return (
@@ -50,6 +50,11 @@ function TopNav() {
               <h3>Create Shifts</h3>
             </button>
           </Link>
+          <Link to="/listshifts">
+            <button>
+              <h3>List Shifts</h3>
+            </button>
+          </Link>
         </nav>
         <Switch>
           <Route path="/signUp">
@@ -69,6 +74,9 @@ function TopNav() {
           </Route>
           <Route path="/updateorganisation">
             <UpdateOrganisation />
+          </Route>
+          <Route path="/listshifts">
+            <ListShifts />
           </Route>
           <Route path="/createshift">
             <CreateShifts />
