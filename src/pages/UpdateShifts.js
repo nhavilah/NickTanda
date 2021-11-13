@@ -1,7 +1,49 @@
 import React from "react";
 import { useState, useEffect } from "react";
 
-function JoinOrganisations() {
+function UpdateShifts() {
+  const [selection,setSelection] = useState("")
+  //get users
+  const [users,setUsers] = useState([])
+  useEffect(()=>{
+    fetch(
+      'http://127.0.0.1:3000/users',
+      {
+        method: "get",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": sessionStorage.getItem("sessionId")
+        }
+      }
+    )
+    .then(response => response.json())
+    .then(data => 
+      {
+        setUsers(data)
+      } 
+    )
+  },[])
+  //get shifts
+  const [shifts,setShifts] = useState([])
+  useEffect(()=>{
+    fetch(
+      'http://127.0.0.1:3000/shifts',
+      {
+        method: "get",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": sessionStorage.getItem("sessionId")
+        }
+      }
+    )
+    .then(response => response.json())
+    .then(data => 
+      {
+        setShifts(data)
+      } 
+    )
+  },[])
+
   const [formData,setFormData] = useState({
     start: "2018-01-01 10:15",
     finish: "2018-01-01 12:20",
@@ -10,11 +52,11 @@ function JoinOrganisations() {
 
   const authenticate = (e) => {
     e.preventDefault()
-    if(!formData.name || !formData.hourlyRate) {
+    if(!formData.start || !formData.finish || !selection.length > 0 ) {
       alert("Make sure you fill out all fields!")
     }else{
       fetch(
-        'http://127.0.0.1:3000/shifts/:id',
+        `http://127.0.0.1:3000/shifts/${selection}`,
         {
           method: "put",
           headers: {
@@ -37,10 +79,27 @@ function JoinOrganisations() {
     }
   }
 
+  function ShiftDropdown() {
+    let test = shifts.map((shift,item)=>{
+      for(let i=0;i<users.length;i++){
+        if(users[i].id===shift.userId){
+          return <option value={shift.id}>{shift.id} {users[i].name} Starting {shift.start} Finishing {shift.finish}</option>
+        }
+      }
+    })  
+    return test
+  }
+
   return (
     <div>
       <form onSubmit={authenticate}>
-        <h1>Update Organisation</h1>
+        <h1>Update Shifts</h1>
+        <h3>Choose Shift</h3>
+        <select onChange={(e)=>{setSelection(e.target.value)}}>
+          <option selected disabled>Select A Shift</option>
+          <ShiftDropdown />
+        </select>
+        <br />
         <label>
           Start:
           <input type="text" name="name" onChange={(e)=>{setFormData({...formData, start: e.target.value})}} value={formData.start}/>
@@ -63,4 +122,4 @@ function JoinOrganisations() {
   );
 }
 
-export default JoinOrganisations;
+export default UpdateShifts;
