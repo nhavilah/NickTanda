@@ -1,7 +1,15 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
 function UpdateOrganisations() {
+  let history = useHistory();
+  const [formData,setFormData] = useState({
+    name: "",
+    hourlyRate: 0
+  })
+  const params = new URLSearchParams(window.location.search);
+  let id = params.get("id")
   const [organisations,setOrganisations] = useState([])
   useEffect(()=>{
     fetch(
@@ -18,13 +26,16 @@ function UpdateOrganisations() {
     .then(data => 
       {
         setOrganisations(data)
+        for(let i=0;i<data.length;i++){
+          if(data[i].id == id){
+            console.log("yes")
+            setFormData({...formData, name: data[i].name, hourlyRate: data[i].hourlyRate})
+          }
+        }
       } 
     )
   },[])
-  const [formData,setFormData] = useState({
-    name: "",
-    hourlyRate: 0
-  })
+  
   const [selection,setSelection] = useState("")
 
   const authenticate = (e) => {
@@ -33,7 +44,7 @@ function UpdateOrganisations() {
       alert("Make sure you fill out all fields!")
     }else{
       fetch(
-        `http://127.0.0.1:3000/organisations/${selection}`,
+        `http://127.0.0.1:3000/organisations/${id}`,
         {
           method: "put",
           headers: {
@@ -46,29 +57,18 @@ function UpdateOrganisations() {
           })
         }
       )
-      .then(response => response.json())
-      .then(data => 
+      .then(() => 
         {
-          alert("Successfully Updated "+formData.name)
+          history.replace("/listorganisation")
         } 
       )
     }
   }
 
-  if(organisations[0]){
-    function DropDownOptions() {
-      let test = organisations.map((organisation,i)=>{
-        return <option value={organisation.id}>{organisation.name}</option>
-      })
-      return test
-    }
+  if(organisations[0] && formData.name.length !== 0){
 
     return (
       <div>
-        <select placeholder="Select An Organisation" onChange={(e)=>setSelection(e.target.value)}>
-          <option value="" disabled selected>Select An Organisation</option>
-          <DropDownOptions />
-        </select>
         <form onSubmit={authenticate}>
           <h1>Update Organisation</h1>
           <label>

@@ -42,11 +42,6 @@ function TopNav() {
               <h3>List Organisation</h3>
             </button>
           </Link>
-          <Link to="/updateorganisation">
-            <button>
-              <h3>Update Organisation</h3>
-            </button>
-          </Link>
           <Link to="/createshift">
             <button>
               <h3>Create Shifts</h3>
