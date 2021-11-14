@@ -1,7 +1,9 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
 function CreateShifts() {
+  let history = useHistory();
   const [users,setUsers] = useState([])
   const [selection,setSelection] = useState(0)
   useEffect(()=>{
@@ -52,8 +54,9 @@ function CreateShifts() {
       .then(response => response.json())
       .then(data => 
         {
-          if(data.length === 5) {
+          if(data.start) {
             alert("Shift Created Successfully")
+            history.replace("/listshifts")
           }
         } 
       )

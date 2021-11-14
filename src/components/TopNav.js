@@ -13,94 +13,116 @@ import ListUsers from "../pages/ListUsers";
 import UserInfo from "../pages/UserInfo";
 
 function TopNav() {
-  return (
-    <>
-      <Router>
-        <nav>
-          <Link to="/signup">
-            <button>
-              <h3>Sign Up</h3>
-            </button>
-          </Link>
-          <Link to="/login">
-            <button>
-              <h3>Login</h3>
-            </button>
-          </Link>
-          <Link to="/logout">
-            <button>
-              <h3>Logout</h3>
-            </button>
-          </Link>
-          <Link to="/createorganisation">
-            <button>
-              <h3>Create Organisation</h3>
-            </button>
-          </Link>
-          <Link to="/listorganisation">
-            <button>
-              <h3>List Organisation</h3>
-            </button>
-          </Link>
-          <Link to="/createshift">
-            <button>
-              <h3>Create Shifts</h3>
-            </button>
-          </Link>
-          <Link to="/listshifts">
-            <button>
-              <h3>List Shifts</h3>
-            </button>
-          </Link>
-          <Link to="/listusers">
-            <button>
-              <h3>List Users</h3>
-            </button>
-          </Link>
-          <Link to="/me">
-            <button>
-              <h3>About Me</h3>
-            </button>
-          </Link>
-        </nav>
-        <Switch>
-          <Route path="/signUp">
-            <SignUp />
-          </Route>
-          <Route path="/login">
-            <Login />
-          </Route>
-          <Route path="/logout">
-            <Logout />
-          </Route>
-          <Route path="/createorganisation">
-            <CreateOrganisation />
-          </Route>
-          <Route path="/listorganisation">
-            <ListOrganisation />
-          </Route>
-          <Route path="/updateorganisation">
-            <UpdateOrganisation />
-          </Route>
-          <Route path="/listshifts">
-            <ListShifts />
-          </Route>
-          <Route path="/createshift">
-            <CreateShifts />
-          </Route>
-          <Route path="/updateshifts">
-            <UpdateShifts />
-          </Route>
-          <Route path="/listusers">
-            <ListUsers />
-          </Route>
-          <Route path="/me">
-            <UserInfo />
-          </Route>
-        </Switch>
-      </Router>
-    </>
-  );
+  let token = sessionStorage.getItem("sessionId")
+  if(token){
+    return (
+      <>
+        <Router>
+          <nav>
+            <Link to="/signup">
+              <button>
+                <h3>Sign Up</h3>
+              </button>
+            </Link>
+            <Link to="/logout">
+              <button>
+                <h3>Logout</h3>
+              </button>
+            </Link>
+            <Link to="/createorganisation">
+              <button>
+                <h3>Create Organisation</h3>
+              </button>
+            </Link>
+            <Link to="/listorganisation">
+              <button>
+                <h3>List Organisation</h3>
+              </button>
+            </Link>
+            <Link to="/createshift">
+              <button>
+                <h3>Create Shifts</h3>
+              </button>
+            </Link>
+            <Link to="/listshifts">
+              <button>
+                <h3>List Shifts</h3>
+              </button>
+            </Link>
+            <Link to="/listusers">
+              <button>
+                <h3>List Users</h3>
+              </button>
+            </Link>
+            <Link to="/me">
+              <button>
+                <h3>About Me</h3>
+              </button>
+            </Link>
+          </nav>
+          <Switch>
+            <Route path="/signUp">
+              <SignUp />
+            </Route>
+            <Route path="/logout">
+              <Logout />
+            </Route>
+            <Route path="/createorganisation">
+              <CreateOrganisation />
+            </Route>
+            <Route path="/listorganisation">
+              <ListOrganisation />
+            </Route>
+            <Route path="/updateorganisation">
+              <UpdateOrganisation />
+            </Route>
+            <Route path="/listshifts">
+              <ListShifts />
+            </Route>
+            <Route path="/createshift">
+              <CreateShifts />
+            </Route>
+            <Route path="/updateshifts">
+              <UpdateShifts />
+            </Route>
+            <Route path="/listusers">
+              <ListUsers />
+            </Route>
+            <Route path="/me">
+              <UserInfo />
+            </Route>
+          </Switch>
+        </Router>
+      </>
+    );
+  }else{
+    return (
+      <>
+        <Router>
+          <nav>
+            <Link to="/signup">
+              <button>
+                <h3>Sign Up</h3>
+              </button>
+            </Link>
+            <Link to="/login">
+              <button>
+                <h3>Login</h3>
+              </button>
+            </Link>
+          </nav>
+          <Switch>
+            <Route path="/signUp">
+              <SignUp />
+            </Route>
+            <Route path="/login">
+              <Login />
+            </Route>
+          </Switch>
+        </Router>
+      </>
+    );
+  }
 }
 
 export default TopNav;

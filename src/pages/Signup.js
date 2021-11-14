@@ -13,8 +13,9 @@ function SignUp() {
     e.preventDefault()
     if(formData.password !== formData.confirmPassword) {
       alert("Make sure your passwords match!")
+    }else if(formData.name.length === 0 || formData.email.length === 0 || formData.password.length === 0 || formData.confirmPassword.length === 0){
+      alert("Please Fill In All Fields!")
     }else{
-      console.log("yes")
       fetch(
         'http://127.0.0.1:3000/auth/signup',
         {

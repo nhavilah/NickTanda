@@ -1,7 +1,9 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
 function Login() {
+  let history = useHistory();
   const [formData,setFormData] = useState({
     email: "",
     password: ""
@@ -33,8 +35,10 @@ function Login() {
             alert("Login Successful")
             console.log(data.sessionId)
             sessionStorage.setItem("sessionId",data.sessionId)
+            history.replace("/listorganisation")
+            window.location.reload(true);
           }else{
-            alert("User does not exist")
+            alert("Login Details Are Incorrect. Check Username And Password, Or Sign Up!")
           }
         } 
       )

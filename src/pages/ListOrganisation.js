@@ -4,6 +4,19 @@ import { useHistory } from "react-router-dom";
 
 function ViewOrganisations() {
   let history = useHistory();
+  const [info, setInfo] = useState([])
+    useEffect(() => {
+        fetch('http://127.0.0.1:3000/users/me', {
+            method: "get",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": sessionStorage.getItem("sessionId")
+            }
+        }).then(response => response.json()).then(data => {
+            console.log(data)
+            setInfo(data)
+        })
+    }, [])
   const [organisations,setOrganisations] = useState([])
   useEffect(()=>{
     fetch(
@@ -37,7 +50,7 @@ function ViewOrganisations() {
       }
     )
     .then(response => response.json())
-    .then(data => 
+    .then(() => 
       {
         alert("Joined "+name)
         window.location.reload(true);
@@ -64,12 +77,16 @@ function ViewOrganisations() {
 
   if(organisations[0]){
     let test = organisations.map((organisation,i)=>{
-      return <div><h3>Name: {organisation.name}</h3><h3>Hourly Rate: {organisation.hourlyRate}</h3><button onClick={()=>JoinOrganisation(organisation.id,organisation.name)}>Join</button><button onClick={()=>{history.replace(`/updateorganisation?id=${organisation.id}`)}}>Update</button><button onClick={()=>LeaveOrganisation(organisation.name)}>Leave</button></div>
+      if(organisation.id === info.organisationId){
+        return <div><h3>Name: {organisation.name}(You Are Part Of This)</h3><h3>Hourly Rate: {organisation.hourlyRate}</h3><button onClick={()=>JoinOrganisation(organisation.id,organisation.name)}>Join</button><button onClick={()=>{history.replace(`/updateorganisation?id=${organisation.id}`)}}>Update</button><button onClick={()=>LeaveOrganisation(organisation.name)}>Leave</button></div> 
+      }else{
+        return <div><h3>Name: {organisation.name}</h3><h3>Hourly Rate: {organisation.hourlyRate}</h3><button onClick={()=>JoinOrganisation(organisation.id,organisation.name)}>Join</button><button onClick={()=>{history.replace(`/updateorganisation?id=${organisation.id}`)}}>Update</button><button onClick={()=>LeaveOrganisation(organisation.name)}>Leave</button></div>
+      }
     })
     return test
   }
 
-  return <h1>Loading</h1>
+  return <h1>Loading Organisations....If You Can't See Anything Loading, Create An Organisation!</h1>
 }
 
 export default ViewOrganisations;

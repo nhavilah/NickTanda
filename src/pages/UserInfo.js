@@ -61,19 +61,28 @@ function UserInfo() {
         if (!passwordData.oldPassword.length > 0 || !passwordData.password.length > 0 || !passwordData.passwordConfirmation.length > 0) {
             alert("Make Sure You Fill Out All Fields")
         } else {
-            fetch('http://127.0.0.1:3000/users/me/change_password', {
-                method: "put",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": sessionStorage.getItem("sessionId")
-                },
-                body: JSON.stringify(
-                    {oldPassword: passwordData.oldPassword, newPassword: passwordData.password, newPassowrdConfirmation: passwordData.passwordConfirmation}
-                )
-            }).then(() => {
-                alert("Password Change Successful");
-                window.location.reload(true);
-            })
+            if(passwordData.password !== passwordData.passwordConfirmation){
+                alert("New Passwords Do Not Match. Please Make Sure Your New Passwords Match")
+            }else{
+                fetch('http://127.0.0.1:3000/users/me/change_password', {
+                    method: "put",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": sessionStorage.getItem("sessionId")
+                    },
+                    body: JSON.stringify(
+                        {oldPassword: passwordData.oldPassword, newPassword: passwordData.password, newPasswordConfirmation: passwordData.passwordConfirmation}
+                    )
+                })
+                .then(response=>{
+                    if(response.status !== 200){
+                        alert("Current Password Incorrect. Please Check Your Passwords Are Correct")
+                    }else{
+                        alert("Password Change Successful");
+                        window.location.reload(true);
+                    }
+                })
+            }
         }
     }
 

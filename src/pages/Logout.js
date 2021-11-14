@@ -16,13 +16,18 @@ function Logout() {
     )
     .then(response => response.json())
     .then(data => console.log(data))
+    .then(()=>{
+      alert("Logging Out")
+      sessionStorage.removeItem("sessionId")
+      window.location.reload(true);
+    })
   }
 
   return (
     <div>
       <form onSubmit={authenticate}>
         <h1>Log Out</h1>
-        <input type="submit" value="Submit"/>
+        <input type="submit" value="Log Out"/>
       </form>
     </div>
   );
