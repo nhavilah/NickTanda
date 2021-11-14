@@ -64,7 +64,7 @@ function ViewOrganisations() {
 
   if(organisations[0]){
     let test = organisations.map((organisation,i)=>{
-      return <div><h3>Name: {organisation.name}</h3><h3>Hourly Rate: {organisation.hourlyRate}</h3><button onClick={()=>JoinOrganisation(organisation.id,organisation.name)}>Join</button><button onClick={()=>{history.replace(`/updateorganisation2?id=${organisation.id}`)}}>Update</button><button onClick={()=>LeaveOrganisation(organisation.name)}>Leave</button></div>
+      return <div><h3>Name: {organisation.name}</h3><h3>Hourly Rate: {organisation.hourlyRate}</h3><button onClick={()=>JoinOrganisation(organisation.id,organisation.name)}>Join</button><button onClick={()=>{history.replace(`/updateorganisation?id=${organisation.id}`)}}>Update</button><button onClick={()=>LeaveOrganisation(organisation.name)}>Leave</button></div>
     })
     return test
   }

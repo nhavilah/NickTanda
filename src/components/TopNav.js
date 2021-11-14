@@ -52,11 +52,6 @@ function TopNav() {
               <h3>List Shifts</h3>
             </button>
           </Link>
-          <Link to="/updateshifts">
-            <button>
-              <h3>Update Shifts</h3>
-            </button>
-          </Link>
           <Link to="/listusers">
             <button>
               <h3>List Users</h3>

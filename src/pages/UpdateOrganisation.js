@@ -36,8 +36,6 @@ function UpdateOrganisations() {
     )
   },[])
   
-  const [selection,setSelection] = useState("")
-
   const authenticate = (e) => {
     e.preventDefault()
     if(!formData.name || !formData.hourlyRate) {

@@ -1,7 +1,16 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
 function UpdateShifts() {
+  let history = useHistory();
+  const params = new URLSearchParams(window.location.search);
+  let id = params.get("id")
+  const [formData,setFormData] = useState({
+    start: "2018-01-01 10:15",
+    finish: "2018-01-01 12:20",
+    breakLength: 50
+  })
   const [selection,setSelection] = useState("")
   //get users
   const [users,setUsers] = useState([])
@@ -40,23 +49,22 @@ function UpdateShifts() {
     .then(data => 
       {
         setShifts(data)
+        for(let i=0;i<data.length;i++){
+          if(data[i].id == id){
+            setFormData({...formData, start: data[i].start, finish: data[i].finish, breakLength: data[i].breakLength})
+          }
+        }
       } 
     )
   },[])
 
-  const [formData,setFormData] = useState({
-    start: "2018-01-01 10:15",
-    finish: "2018-01-01 12:20",
-    breakLength: 50
-  })
-
   const authenticate = (e) => {
     e.preventDefault()
-    if(!formData.start || !formData.finish || !selection.length > 0 ) {
+    if(!formData.start || !formData.finish ) {
       alert("Make sure you fill out all fields!")
     }else{
       fetch(
-        `http://127.0.0.1:3000/shifts/${selection}`,
+        `http://127.0.0.1:3000/shifts/${id}`,
         {
           method: "put",
           headers: {
@@ -70,35 +78,20 @@ function UpdateShifts() {
           })
         }
       )
-      .then(response => response.json())
-      .then(data => 
+      .then(() => 
         {
-          console.log(data)
+          alert("Successfully updated shift")
+          history.replace("/listshifts")
         } 
       )
     }
   }
 
-  function ShiftDropdown() {
-    let test = shifts.map((shift,item)=>{
-      for(let i=0;i<users.length;i++){
-        if(users[i].id===shift.userId){
-          return <option value={shift.id}>{shift.id} {users[i].name} Starting {shift.start} Finishing {shift.finish}</option>
-        }
-      }
-    })  
-    return test
-  }
 
   return (
     <div>
       <form onSubmit={authenticate}>
         <h1>Update Shifts</h1>
-        <h3>Choose Shift</h3>
-        <select onChange={(e)=>{setSelection(e.target.value)}}>
-          <option selected disabled>Select A Shift</option>
-          <ShiftDropdown />
-        </select>
         <br />
         <label>
           Start:
