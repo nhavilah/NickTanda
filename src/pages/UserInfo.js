@@ -61,9 +61,9 @@ function UserInfo() {
         if (!passwordData.oldPassword.length > 0 || !passwordData.password.length > 0 || !passwordData.passwordConfirmation.length > 0) {
             alert("Make Sure You Fill Out All Fields")
         } else {
-            if(passwordData.password !== passwordData.passwordConfirmation){
+            if (passwordData.password !== passwordData.passwordConfirmation) {
                 alert("New Passwords Do Not Match. Please Make Sure Your New Passwords Match")
-            }else{
+            } else {
                 fetch('http://127.0.0.1:3000/users/me/change_password', {
                     method: "put",
                     headers: {
@@ -73,11 +73,10 @@ function UserInfo() {
                     body: JSON.stringify(
                         {oldPassword: passwordData.oldPassword, newPassword: passwordData.password, newPasswordConfirmation: passwordData.passwordConfirmation}
                     )
-                })
-                .then(response=>{
-                    if(response.status !== 200){
+                }).then(response => {
+                    if (response.status !== 200) {
                         alert("Current Password Incorrect. Please Check Your Passwords Are Correct")
-                    }else{
+                    } else {
                         alert("Password Change Successful");
                         window.location.reload(true);
                     }
@@ -91,7 +90,9 @@ function UserInfo() {
             if (organisations[i].id === info.organisationId) {
                 return (
                     <div>
-                        <h1>About Me</h1>
+                        <h1>
+                            <u>About Me</u>
+                        </h1>
                         <h2>Name: {
                             info.name
                         }</h2>
@@ -104,25 +105,20 @@ function UserInfo() {
                         <br/>
                         <form onSubmit={changeDetails}>
                             <h1>Change My Details</h1>
-                            <label>
-                                Name:
-                                <input type="text" name="name"
-                                    onChange={
-                                        (e) => {
-                                            setFormData({
-                                                ...formData,
-                                                name: e.target.value
-                                            })
-                                        }
+                            <input type="text" placeholder="Name" name="name"
+                                onChange={
+                                    (e) => {
+                                        setFormData({
+                                            ...formData,
+                                            name: e.target.value
+                                        })
                                     }
-                                    value={
-                                        formData.name
-                                    }/>
-                            </label>
-                        <br/>
-                        <label>
-                            Email:
-                            <input type="email" name="email"
+                                }
+                                value={
+                                    formData.name
+                                }/>
+                            <br/>
+                            <input type="email" placeholder="Email" name="email"
                                 onChange={
                                     (e) => {
                                         setFormData({
@@ -134,64 +130,54 @@ function UserInfo() {
                                 value={
                                     formData.email
                                 }/>
-                        </label>
-                    <br/>
-                    <input type="submit" value="Submit"/>
-                </form>
-                <br/>
-                <form onSubmit={changePassword}>
-                    <h1>Change My Password</h1>
-                    <label>
-                        Old Password:
-                        <input type="password" name="oldPassword"
-                            onChange={
-                                (e) => {
-                                    setPasswordData({
-                                        ...passwordData,
-                                        oldPassword: e.target.value
-                                    })
+                            <br/>
+                            <input type="submit" className="submit" value="Submit"/>
+                        </form>
+                        <br/>
+                        <form onSubmit={changePassword}>
+                            <h1>Change My Password</h1>
+                            <input type="password" placeholder="Old Password" name="oldPassword"
+                                onChange={
+                                    (e) => {
+                                        setPasswordData({
+                                            ...passwordData,
+                                            oldPassword: e.target.value
+                                        })
+                                    }
                                 }
-                            }
-                            value={
-                                passwordData.oldPassword
-                            }/>
-                    </label>
-                <br/>
-                <label>
-                    Password:
-                    <input type="password" name="newPassword"
-                        onChange={
-                            (e) => {
-                                setPasswordData({
-                                    ...passwordData,
-                                    password: e.target.value
-                                })
-                            }
-                        }
-                        value={
-                            passwordData.password
-                        }/>
-                </label>
-            <br/>
-            <label>
-                Password Confirmation:
-                <input type="password" name="newPassword"
-                    onChange={
-                        (e) => {
-                            setPasswordData({
-                                ...passwordData,
-                                passwordConfirmation: e.target.value
-                            })
-                        }
-                    }
-                    value={
-                        passwordData.passwordConfirmation
-                    }/>
-            </label>
-        <br/>
-        <input type="submit" value="Submit"/>
-    </form>
-</div>
+                                value={
+                                    passwordData.oldPassword
+                                }/>
+                            <br/>
+                            <input type="password" placeholder="Password" name="newPassword"
+                                onChange={
+                                    (e) => {
+                                        setPasswordData({
+                                            ...passwordData,
+                                            password: e.target.value
+                                        })
+                                    }
+                                }
+                                value={
+                                    passwordData.password
+                                }/>
+                            <br/>
+                            <input type="password" placeholder="Password Confirmation" name="newPassword"
+                                onChange={
+                                    (e) => {
+                                        setPasswordData({
+                                            ...passwordData,
+                                            passwordConfirmation: e.target.value
+                                        })
+                                    }
+                                }
+                                value={
+                                    passwordData.passwordConfirmation
+                                }/>
+                            <br/>
+                            <input type="submit" className="submit" value="Submit"/>
+                        </form>
+                    </div>
                 );
             }
         }
