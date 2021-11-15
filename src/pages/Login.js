@@ -1,13 +1,19 @@
 import React from "react";
 import {useState, useEffect} from "react";
 import {useHistory} from "react-router-dom";
-import Popup from 'reactjs-popup';
-import 'reactjs-popup/dist/index.css';
 
 function Login() {
     let history = useHistory();
     const [formData, setFormData] = useState({email: "", password: ""})
-
+    useEffect(()=>{
+      if(sessionStorage.getItem("username") && sessionStorage.getItem("password")){
+        setFormData({
+          ...formData,
+          email: sessionStorage.getItem("username"),
+          password: sessionStorage.getItem("password")
+        })
+      }
+    },[])
     const authenticate = (e) => {
         e.preventDefault()
         //error handling
@@ -28,9 +34,16 @@ function Login() {
                     alert("Login Successful")
                     console.log(data.sessionId)
                     sessionStorage.setItem("sessionId", data.sessionId)
-                    //sessionStorage.setItem("username")
-                    //sessionStorage.setItem("password")
-
+                    let checkbox = document.getElementById("checkbox")
+                    if(checkbox.checked){
+                      sessionStorage.setItem("username",formData.email)
+                      sessionStorage.setItem("password",formData.password)
+                    }else{
+                      if(sessionStorage.getItem("username") && sessionStorage.getItem("password")){
+                        sessionStorage.removeItem("username")
+                        sessionStorage.removeItem("password")
+                      }
+                    }
                     history.replace("/listorganisation")
                     window.location.reload(true);
                 } else {
@@ -78,9 +91,9 @@ function Login() {
                 <br/>
                 <input type="submit" className="submit" value="Submit"/>
             </form>
-            <Popup trigger={<button>Forgot Password?</button>} position="center">
-              <div></div>
-            </Popup>
+            <label>Remember Me</label>
+            <br />
+            <input type="checkbox" id="checkbox"/>
         </div>
     );
 }

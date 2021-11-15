@@ -1,20 +1,22 @@
 import React from "react";
+import {useHistory} from "react-router-dom";
 
 function Logout() {
-
-    const authenticate = (e) => {
-        e.preventDefault()
-        fetch('http://127.0.0.1:3000/auth/logout', {
-            method: 'DELETE',
-            headers: {
-                "Authorization": sessionStorage.getItem("sessionId")
-            }
-        })
-        .then(() => {
-            alert("Logging Out")
-            sessionStorage.removeItem("sessionId")
-            window.location.reload(true);
-        })
+  let history = useHistory()
+  const authenticate = (e) => {
+      e.preventDefault()
+      fetch('http://127.0.0.1:3000/auth/logout', {
+          method: 'DELETE',
+          headers: {
+              "Authorization": sessionStorage.getItem("sessionId")
+          }
+      })
+      .then(() => {
+          alert("Logging Out")
+          sessionStorage.removeItem("sessionId")
+          history.replace("/login")
+          window.location.reload(true);
+      })
     }
 
     return (
