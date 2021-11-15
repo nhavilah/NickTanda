@@ -5,6 +5,7 @@ function UserInfo() {
     const [formData, setFormData] = useState({name: "", email: ""})
     const [passwordData, setPasswordData] = useState({oldPassword: "", password: "", passwordConfirmation: ""})
 
+    //store organisations in page state
     const [organisations, setOrganisations] = useState([])
     useEffect(() => {
         fetch('http://127.0.0.1:3000/organisations', {
@@ -17,6 +18,7 @@ function UserInfo() {
             setOrganisations(data)
         })
     }, [])
+    //store user information in page state
     const [info, setInfo] = useState([])
     useEffect(() => {
         fetch('http://127.0.0.1:3000/users/me', {
@@ -30,9 +32,10 @@ function UserInfo() {
             setInfo(data)
         })
     }, [])
-
+    //change details functionality
     const changeDetails = (e) => {
         e.preventDefault()
+        //error handling
         if (!formData.name.length > 0 || !formData.email.length > 0) {
             alert("Make Sure You Fill In All Fields")
         } else {
@@ -56,6 +59,7 @@ function UserInfo() {
         }
     }
 
+    //change password functionality
     const changePassword = (e) => {
         e.preventDefault();
         if (!passwordData.oldPassword.length > 0 || !passwordData.password.length > 0 || !passwordData.passwordConfirmation.length > 0) {

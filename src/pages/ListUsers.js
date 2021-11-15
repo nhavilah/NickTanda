@@ -15,6 +15,7 @@ function ListUsers() {
             setOrganisations(data)
         })
     }, [])
+    //store the users in page state
     const [users, setUsers] = useState([])
     useEffect(() => {
         fetch('http://127.0.0.1:3000/users', {
@@ -29,6 +30,7 @@ function ListUsers() {
         })
     }, [])
 
+    //check for users in state
     if (users[0]) {
         function Content() {
             let test = users.map((user, i) => {

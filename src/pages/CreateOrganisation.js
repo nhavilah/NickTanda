@@ -11,7 +11,7 @@ function CreateOrganisations() {
         if (!formData.name || !formData.hourlyRate) {
             alert("Make sure you fill out all fields!")
         } else {
-          //send the fetch request
+          //send the fetch request to create organisations
             fetch('http://127.0.0.1:3000/organisations/create_join', {
                 method: "post",
                 headers: {

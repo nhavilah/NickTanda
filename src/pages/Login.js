@@ -5,6 +5,7 @@ import {useHistory} from "react-router-dom";
 function Login() {
     let history = useHistory();
     const [formData, setFormData] = useState({email: "", password: ""})
+    //remember me functionality
     useEffect(()=>{
       if(sessionStorage.getItem("username") && sessionStorage.getItem("password")){
         setFormData({
@@ -14,6 +15,7 @@ function Login() {
         })
       }
     },[])
+    //login functionality
     const authenticate = (e) => {
         e.preventDefault()
         //error handling
@@ -35,6 +37,7 @@ function Login() {
                     console.log(data.sessionId)
                     sessionStorage.setItem("sessionId", data.sessionId)
                     let checkbox = document.getElementById("checkbox")
+                    //store the user credentials if remember me is ticked
                     if(checkbox.checked){
                       sessionStorage.setItem("username",formData.email)
                       sessionStorage.setItem("password",formData.password)
@@ -47,6 +50,7 @@ function Login() {
                     history.replace("/listorganisation")
                     window.location.reload(true);
                 } else {
+                  //error handling
                     alert("Login Details Are Incorrect. Check Username And Password, Or Sign Up!")
                 }
             })

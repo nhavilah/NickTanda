@@ -8,8 +8,10 @@ function UpdateShifts() {
     let id = params.get("id")
     const [formData, setFormData] = useState({start: "2018-01-01 10:15", finish: "2018-01-01 12:20", breakLength: 50})
 
+    //update shift functionality
     const authenticate = (e) => {
         e.preventDefault()
+        //error handling
         if (!formData.start || !formData.finish) {
             alert("Make sure you fill out all fields!")
         } else {

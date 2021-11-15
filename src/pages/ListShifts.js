@@ -18,6 +18,7 @@ function ViewShifts() {
             setOrganisations(data)
         })
     }, [])
+    //load the database shifts in the state of the page
     const [shifts, setShifts] = useState([])
     useEffect(() => {
         fetch('http://127.0.0.1:3000/shifts', {
@@ -57,7 +58,9 @@ function ViewShifts() {
             window.location.reload(true)
         })
     }
-
+    //if there are shifts load them in
+    //check first for users, then find the corresponding organisations
+    //then find shifts
     if (shifts[0]) {
         function Content() {
             let test = shifts.map((shift, i) => {

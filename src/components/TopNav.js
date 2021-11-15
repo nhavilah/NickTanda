@@ -15,6 +15,7 @@ import {useState,useEffect} from "react"
 
 function TopNav() {
   let token = sessionStorage.getItem("sessionId")
+  //logic for showing when the user is logged in
   const [info, setInfo] = useState([])
   function GetData(){
     useEffect(() => {
@@ -30,6 +31,7 @@ function TopNav() {
         })
     }, [])
   }
+  //if user is logged in
   if(token){
     GetData()
     return (
@@ -114,6 +116,7 @@ function TopNav() {
       </>
     );
   }else{
+    //if user is logged out
     return (
       <>
         <Router>

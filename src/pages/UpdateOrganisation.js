@@ -7,6 +7,7 @@ function UpdateOrganisations() {
     const [formData, setFormData] = useState({name: "", hourlyRate: 0})
     const params = new URLSearchParams(window.location.search);
     let id = params.get("id")
+    //store all organisations in state
     const [organisations, setOrganisations] = useState([])
     useEffect(() => {
         fetch('http://127.0.0.1:3000/organisations', {
@@ -30,6 +31,7 @@ function UpdateOrganisations() {
         })
     }, [])
 
+    //update functionality
     const authenticate = (e) => {
         e.preventDefault()
         if (!formData.name || !formData.hourlyRate) {
