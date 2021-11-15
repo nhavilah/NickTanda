@@ -74,7 +74,7 @@ function UpdateShifts() {
                     <u>Update Shifts</u>
                 </h1>
                 <br/>
-                <input type="text" placeholder="Start" name="name"
+                <input type="datetime" placeholder="Start" name="name"
                     onChange={
                         (e) => {
                             setFormData({
@@ -87,7 +87,7 @@ function UpdateShifts() {
                         formData.start
                     }/>
                 <br/>
-                <input type="text" placeholder="Finish" name="name"
+                <input type="datetime" placeholder="Finish" name="name"
                     onChange={
                         (e) => {
                             setFormData({

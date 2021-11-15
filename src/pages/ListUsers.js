@@ -44,6 +44,7 @@ function ListUsers() {
                             <h3>Email: {
                                 user.email
                             }</h3>
+                            <hr />
                         </div>
                     }
                 }
@@ -57,7 +58,7 @@ function ListUsers() {
             <Content/>
         </>
     }
-    return <h1>Loading</h1>
+    return <h1>Loading Users....If You Can't See Anything Loading, Make Sure You've Joined An Organisation!</h1>
 }
 
 export default ListUsers;

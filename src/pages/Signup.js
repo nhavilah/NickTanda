@@ -36,6 +36,8 @@ function SignUp() {
                 <h1>
                     <u>Sign Up</u>
                 </h1>
+                <label>Name</label>
+                <br />
                 <input type="text" placeholder="Name" name="name"
                     onChange={
                         (e) => {
@@ -49,6 +51,8 @@ function SignUp() {
                         formData.name
                     }/>
                 <br/>
+                <label>Email</label>
+                <br />
                 <input type="email" placeholder="Email" name="email"
                     onChange={
                         (e) => {
@@ -62,6 +66,8 @@ function SignUp() {
                         formData.email
                     }/>
                 <br/>
+                <label>Password</label>
+                <br />
                 <input type="password" placeholder="Password" name="password"
                     onChange={
                         (e) => {
@@ -75,6 +81,8 @@ function SignUp() {
                         formData.password
                     }/>
                 <br/>
+                <label>Confirm Password</label>
+                <br />
                 <input type="password" placeholder="Confirm Password" name="confirmPassword"
                     onChange={
                         (e) => {

@@ -33,6 +33,8 @@ function CreateOrganisations() {
                 <h1>
                     <u>Create Organisation</u>
                 </h1>
+                <label>Name</label>
+                <br />
                 <input type="text" placeholder="Name" name="name"
                     onChange={
                         (e) => {
@@ -46,6 +48,8 @@ function CreateOrganisations() {
                         formData.name
                     }/>
                 <br/>
+                <label>Hourly Rate</label>
+                <br />
                 <input type="number" placeholder="Hourly Rate" name="hourlyRate"
                     onChange={
                         (e) => {

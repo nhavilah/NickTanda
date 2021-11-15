@@ -105,6 +105,7 @@ function UserInfo() {
                         <br/>
                         <form onSubmit={changeDetails}>
                             <h1>Change My Details</h1>
+                            <label>Name</label>
                             <input type="text" placeholder="Name" name="name"
                                 onChange={
                                     (e) => {
@@ -118,6 +119,7 @@ function UserInfo() {
                                     formData.name
                                 }/>
                             <br/>
+                            <label>Email</label>
                             <input type="email" placeholder="Email" name="email"
                                 onChange={
                                     (e) => {
@@ -136,6 +138,7 @@ function UserInfo() {
                         <br/>
                         <form onSubmit={changePassword}>
                             <h1>Change My Password</h1>
+                            <label>Old Password</label>
                             <input type="password" placeholder="Old Password" name="oldPassword"
                                 onChange={
                                     (e) => {
@@ -149,6 +152,7 @@ function UserInfo() {
                                     passwordData.oldPassword
                                 }/>
                             <br/>
+                            <label>New Password</label>
                             <input type="password" placeholder="Password" name="newPassword"
                                 onChange={
                                     (e) => {
@@ -162,6 +166,7 @@ function UserInfo() {
                                     passwordData.password
                                 }/>
                             <br/>
+                            <label>Password Confirmation</label>
                             <input type="password" placeholder="Password Confirmation" name="newPassword"
                                 onChange={
                                     (e) => {

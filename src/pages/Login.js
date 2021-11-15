@@ -1,6 +1,8 @@
 import React from "react";
 import {useState, useEffect} from "react";
 import {useHistory} from "react-router-dom";
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
 
 function Login() {
     let history = useHistory();
@@ -26,6 +28,9 @@ function Login() {
                     alert("Login Successful")
                     console.log(data.sessionId)
                     sessionStorage.setItem("sessionId", data.sessionId)
+                    //sessionStorage.setItem("username")
+                    //sessionStorage.setItem("password")
+
                     history.replace("/listorganisation")
                     window.location.reload(true);
                 } else {
@@ -41,6 +46,8 @@ function Login() {
                 <h1>
                     <u>Log In</u>
                 </h1>
+                <label>Email</label>
+                <br />
                 <input type="email" placeholder="Email" name="email"
                     onChange={
                         (e) => {
@@ -54,6 +61,8 @@ function Login() {
                         formData.email
                     }/>
                 <br/>
+                <label>Password</label>
+                <br />
                 <input type="password" placeholder="Password" name="password"
                     onChange={
                         (e) => {
@@ -69,6 +78,9 @@ function Login() {
                 <br/>
                 <input type="submit" className="submit" value="Submit"/>
             </form>
+            <Popup trigger={<button>Forgot Password?</button>} position="center">
+              <div></div>
+            </Popup>
         </div>
     );
 }

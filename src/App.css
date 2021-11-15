@@ -31,3 +31,12 @@ input {
   padding: 0.3rem;
   border-color: #032C57;
 }
+
+select {
+  background-color: #032C57;
+  color: white;
+  width: 20rem;
+  border-radius: 5px;
+  padding: 0.3rem;
+  border-color: #032C57;
+}

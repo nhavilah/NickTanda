@@ -77,7 +77,9 @@ function CreateShifts() {
                     <h1>
                         <u>Create Shift</u>
                     </h1>
-                    <input type="text" placeholder="Start" name="name"
+                    <label>Start Time</label>
+                    <br />
+                    <input type="datetime" placeholder="Start" name="name"
                         onChange={
                             (e) => {
                                 setFormData({
@@ -90,7 +92,9 @@ function CreateShifts() {
                             formData.start
                         }/>
                     <br/>
-                    <input type="text" placeholder="Finish" name="name"
+                    <label>Finish Time</label>
+                    <br />
+                    <input type="datetime" placeholder="Finish" name="name"
                         onChange={
                             (e) => {
                                 setFormData({
@@ -103,6 +107,8 @@ function CreateShifts() {
                             formData.finish
                         }/>
                     <br/>
+                    <label>Break Length(minutes)</label>
+                <br />
                     <input type="text" placeholder="Break Length" name="name"
                         onChange={
                             (e) => {

@@ -1,5 +1,4 @@
 import React from "react";
-import {useState, useEffect} from "react";
 
 function Logout() {
 
@@ -10,7 +9,8 @@ function Logout() {
             headers: {
                 "Authorization": sessionStorage.getItem("sessionId")
             }
-        }).then(response => response.json()).then(data => console.log(data)).then(() => {
+        })
+        .then(() => {
             alert("Logging Out")
             sessionStorage.removeItem("sessionId")
             window.location.reload(true);
