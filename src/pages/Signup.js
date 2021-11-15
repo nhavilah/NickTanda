@@ -11,6 +11,8 @@ function SignUp() {
             alert("Make sure your passwords match!")
         } else if (formData.name.length === 0 || formData.email.length === 0 || formData.password.length === 0 || formData.confirmPassword.length === 0) {
             alert("Please Fill In All Fields!")
+        } else if(formData.password.length < 6) {
+            alert("Password Must Be At Least 6 Characters Long")
         } else {
             fetch('http://127.0.0.1:3000/auth/signup', {
                 method: "post",
@@ -66,7 +68,7 @@ function SignUp() {
                         formData.email
                     }/>
                 <br/>
-                <label>Password</label>
+                <label>Password<i> (6 Characters Minimum)</i></label>
                 <br />
                 <input type="password" placeholder="Password" name="password"
                     onChange={
